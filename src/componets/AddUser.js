@@ -1,4 +1,4 @@
-import React,{useState,useContext} from 'react'
+import React,{useContext} from 'react'
 import './users.css'
 import { UseContext } from '../contexts/UserContext'
 
@@ -8,7 +8,7 @@ export default function AddUser() {
 
     function addUser (e){
         e.preventDefault();
-        const id = stateId == -1 ? stateUsers.length : stateId;
+        const id = stateId === -1 ? stateUsers.length : stateId;
         const arg = {
             id,
             email,
