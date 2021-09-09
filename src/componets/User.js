@@ -1,50 +1,47 @@
 import React, { useContext } from "react";
-import "./users.css";
-import { UseContext } from "../contexts/UserContext";
+import "./user.css";
+import { GolobalContext } from "../contexts/GolobalContext";
 
 export default function User() {
-    const { stateUsers, setstateUsers } = useContext(UseContext);
-    const { setid, setemail, setname, setpassword } = useContext(UseContext)
+    const {
+        stateUsers,
+        setstateUsers,
+        setNewUser
+    } = useContext(GolobalContext);
 
-    function handleDeleteUser(id){
-        const  filterd = stateUsers.filter(e => e.id !== id)
+    function handleDeleteUser(id) {
+        const filterd = stateUsers.filter((e) => e.id !== id);
         setstateUsers(filterd);
-        setid(-1);
-        setemail("");
-        setname("");
-        setpassword("");
+        setNewUser({ id : -1,email:'', name: '', password: ''})
     }
 
-    function handleEditUser(e,id){
+    function handleEditUser(e, id) {
         e.preventDefault();
-        setid(id)
-        setemail(stateUsers[id].email)
-        setname(stateUsers[id].name)
-        setpassword(stateUsers[id].password)
+        setNewUser({ id ,
+            email:stateUsers[id].email, 
+            name: stateUsers[id].name, 
+            password:stateUsers[id].password
+        })
     }
 
     return (
-        <div className = 'all-users'>
-            {stateUsers.map((user) => (
+        <div className="all-users">
+            {stateUsers.map(({ id, email, name, password }) => (
                 <div className="user">
-                    <h4> Email: {user.email}</h4>
-                    <p>Name: {user.name}</p>
-                    <p>Pass: {user.password}</p>
+                    <h4> Email: {email}</h4>
+                    <p>Name: {name}</p>
+                    <p>Pass: {password}</p>
 
                     <div className="btn">
                         <button
                             className="square_btn"
-                            onClick={(e) =>
-                                handleEditUser(e, user.id )
-                            }
+                            onClick={(e) => handleEditUser(e, id)}
                         >
                             Edit
                         </button>
                         <button
                             className="square_btn"
-                            onClick={() =>
-                                handleDeleteUser(user.id)
-                            }
+                            onClick={() => handleDeleteUser(id)}
                         >
                             Delete
                         </button>

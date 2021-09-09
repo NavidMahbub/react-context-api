@@ -72,6 +72,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
   }
   .inputs input {
     display: flex;
@@ -82,8 +83,9 @@
     justify-content: center;
     border: 1px solid #013941e1;
     border-radius: 19px;
+    outline: none !important;
   }
-  
+
   @media only screen and (max-width: 1220px) {
     .container {
       width: 100%;
